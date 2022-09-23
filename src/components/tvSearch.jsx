@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Grid } from "../styled/upcoming.styled";
 import { Link } from "react-router-dom";
+import Input from "./Input";
+
+import TvTags from "./TvTags";
 
 const apiKey = "3c6a437304f29ea1b70cd1c62cc6ec91";
 function TvSearch(props) {
@@ -22,27 +25,31 @@ function TvSearch(props) {
     getSearch(params.search);
   }, [params.search]);
   return (
-    <Grid>
-      {searched.length ? (
-        searched.map((series) => {
-          return (
-            <Card key={series.id}>
-              <Link to={"/tv/" + series.id}>
-                <img
-                  src={
-                    "https://image.tmdb.org/t/p/w500/" + series.backdrop_path
-                  }
-                  alt=""
-                />
-              </Link>
-              <p>{series.name}</p>
-            </Card>
-          );
-        })
-      ) : (
-        <h1>sorry, bad search</h1>
-      )}
-    </Grid>
+    <>
+      <Input />
+      <TvTags />
+      <Grid>
+        {searched.length ? (
+          searched.map((series) => {
+            return (
+              <Card key={series.id}>
+                <Link to={"/tv/" + series.id}>
+                  <img
+                    src={
+                      "https://image.tmdb.org/t/p/w500/" + series.backdrop_path
+                    }
+                    alt=""
+                  />
+                </Link>
+                <p>{series.name}</p>
+              </Card>
+            );
+          })
+        ) : (
+          <h1>sorry, bad search</h1>
+        )}
+      </Grid>
+    </>
   );
 }
 

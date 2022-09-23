@@ -20,7 +20,7 @@ function App() {
         <ScrollToTop />
         <div className="app-container">
           <NavBar />
-          <Input />
+
           <Routes>
             <Route path="*" element={<Home />} />
             <Route path="/" element={<Home />} />

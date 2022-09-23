@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { Grid } from "../styled/upcoming.styled";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Input from "./Input";
+import Tags from "./Tags";
 
 function FilteredMovies(props) {
   const apiKey = "3c6a437304f29ea1b70cd1c62cc6ec91";
@@ -22,21 +24,25 @@ function FilteredMovies(props) {
     getFiltred(params.type);
   }, [params.type]);
   return (
-    <Grid>
-      {filtered.map((movie) => {
-        return (
-          <Card key={movie.id}>
-            <Link to={`/movie/${movie.id}`}>
-              <img
-                src={"https://image.tmdb.org/t/p/w500/" + movie.backdrop_path}
-                alt=""
-              />
-            </Link>
-            <p>{movie.title}</p>
-          </Card>
-        );
-      })}
-    </Grid>
+    <>
+      <Input />
+      <Tags />
+      <Grid>
+        {filtered.map((movie) => {
+          return (
+            <Card key={movie.id}>
+              <Link to={`/movie/${movie.id}`}>
+                <img
+                  src={"https://image.tmdb.org/t/p/w500/" + movie.backdrop_path}
+                  alt=""
+                />
+              </Link>
+              <p>{movie.title}</p>
+            </Card>
+          );
+        })}
+      </Grid>
+    </>
   );
 }
 

@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Grid } from "../styled/upcoming.styled";
 import { Link } from "react-router-dom";
+import Input from "./Input";
+import Tags from "./Tags";
 
 const apiKey = "3c6a437304f29ea1b70cd1c62cc6ec91";
 function Search(props) {
@@ -22,25 +24,31 @@ function Search(props) {
     getSearch(params.search);
   }, [params.search]);
   return (
-    <Grid>
-      {searched.length ? (
-        searched.map((movie) => {
-          return (
-            <Card key={movie.id}>
-              <Link to={"/movie/" + movie.id}>
-                <img
-                  src={"https://image.tmdb.org/t/p/w500/" + movie.backdrop_path}
-                  alt=""
-                />
-              </Link>
-              <p>{movie.title}</p>
-            </Card>
-          );
-        })
-      ) : (
-        <h1>sorry, bad search</h1>
-      )}
-    </Grid>
+    <>
+      <Input />
+      <Tags />
+      <Grid>
+        {searched.length ? (
+          searched.map((movie) => {
+            return (
+              <Card key={movie.id}>
+                <Link to={"/movie/" + movie.id}>
+                  <img
+                    src={
+                      "https://image.tmdb.org/t/p/w500/" + movie.backdrop_path
+                    }
+                    alt=""
+                  />
+                </Link>
+                <p>{movie.title}</p>
+              </Card>
+            );
+          })
+        ) : (
+          <h1>sorry, bad search</h1>
+        )}
+      </Grid>
+    </>
   );
 }
 

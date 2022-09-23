@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { Grid } from "../styled/upcoming.styled";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Input from "./Input";
+import TvTags from "./TvTags";
 
 function FilteredTvs(props) {
   const apiKey = "3c6a437304f29ea1b70cd1c62cc6ec91";
@@ -22,21 +24,27 @@ function FilteredTvs(props) {
     getFiltred(params.type);
   }, [params.type]);
   return (
-    <Grid>
-      {filtered.map((series) => {
-        return (
-          <Card key={series.id}>
-            <Link to={`/tv/${series.id}`}>
-              <img
-                src={"https://image.tmdb.org/t/p/w500/" + series.backdrop_path}
-                alt=""
-              />
-            </Link>
-            <p>{series.name}</p>
-          </Card>
-        );
-      })}
-    </Grid>
+    <>
+      <Input />
+      <TvTags />
+      <Grid>
+        {filtered.map((series) => {
+          return (
+            <Card key={series.id}>
+              <Link to={`/tv/${series.id}`}>
+                <img
+                  src={
+                    "https://image.tmdb.org/t/p/w500/" + series.backdrop_path
+                  }
+                  alt=""
+                />
+              </Link>
+              <p>{series.name}</p>
+            </Card>
+          );
+        })}
+      </Grid>
+    </>
   );
 }
 
